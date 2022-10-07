@@ -44,6 +44,21 @@ public class demoOracleTransaction {
 						if (i == 1 && j == 1) {
 							con.commit();// Updated DataBase
 							System.out.println("Transaction Successfully..");
+							
+							PreparedStatement ps3 = con.prepareCall("Insert into TansLog48 values(?,?,?,systimestamp)");
+							ps3.setLong(1, hAccNo);
+							ps3.setLong(2, bAccNo);
+							ps3.setFloat(3, amt);
+							
+							int translong = ps3.executeUpdate();
+							
+							if (translong > 0) {
+								System.out.println("Transaction logged !!!");
+							}
+							
+							
+							
+							
 						} else {
 							con.rollback(sp);
 							System.out.println("Transaction failed...");
